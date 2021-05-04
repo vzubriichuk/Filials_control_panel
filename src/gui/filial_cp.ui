@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>559</width>
+    <height>615</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Панель управления филиалами в отчетах</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QTableWidget" name="table_active_filials">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>150</y>
+      <width>501</width>
+      <height>161</height>
+     </rect>
+    </property>
+    <column>
+     <property name="text">
+      <string>Выбрать</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Филиал</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Название филиала</string>
+     </property>
+     <property name="font">
+      <font>
+       <weight>50</weight>
+       <bold>false</bold>
+       <strikeout>false</strikeout>
+      </font>
+     </property>
+     <property name="textAlignment">
+      <set>AlignLeading|AlignVCenter</set>
+     </property>
+    </column>
+   </widget>
+   <widget class="QTableWidget" name="table_all_filials">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>370</y>
+      <width>501</width>
+      <height>171</height>
+     </rect>
+    </property>
+    <column>
+     <property name="text">
+      <string>Выбрать</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Филиал</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Название филиала</string>
+     </property>
+     <property name="textAlignment">
+      <set>AlignLeading|AlignVCenter</set>
+     </property>
+    </column>
+   </widget>
+   <widget class="QPushButton" name="btn_remove">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>320</y>
+      <width>151</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color:#525252;
+font-weight:bold;
+color:#FFFFFF;
+</string>
+    </property>
+    <property name="text">
+     <string>Исключить выбранное</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_add">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>550</y>
+      <width>151</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color:#525252;
+font-weight:bold;
+color:#FFFFFF;
+</string>
+    </property>
+    <property name="text">
+     <string>Добавить выбранное</string>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="groupBox">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>20</y>
+      <width>501</width>
+      <height>101</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Выберите отчёт</string>
+    </property>
+    <property name="flat">
+     <bool>false</bool>
+    </property>
+    <property name="checkable">
+     <bool>false</bool>
+    </property>
+    <widget class="QPushButton" name="btn_report_info">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>60</y>
+       <width>181</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:#525252;
+font-weight:bold;
+color:#FFFFFF;
+</string>
+     </property>
+     <property name="text">
+      <string>Просмотреть информацию</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="reports_dropdown">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>30</y>
+       <width>391</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <item>
+      <property name="text">
+       <string>...</string>
+      </property>
+     </item>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
