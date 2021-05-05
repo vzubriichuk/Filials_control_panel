@@ -5,6 +5,7 @@ Author : Vitaliy Zubriichuk
 Contact : v@zubr.kiev.ua
 Time    : 30.04.2021 9:14
 """
+
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
 from gui.filial_cp import Ui_MainWindow
@@ -59,6 +60,13 @@ class PopupInfoWindows(QWidget):
         QMessageBox.information(self, 'Добавление филиалов',
                                 'Выбранные филиалы были успешно добавлены.',
                                 QMessageBox.Ok, QMessageBox.Ok)
+
+
+class SplashScreen(QtWidgets.QMainWindow, Ui_MainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)  # Это нужно для инициализации нашего дизайна
+        self.setWindowIcon(QtGui.QIcon('resources/admin.png'))
 
 # main app
 class FilialApp(QtWidgets.QMainWindow, Ui_MainWindow, PopupInfoWindows):
@@ -118,7 +126,11 @@ class FilialApp(QtWidgets.QMainWindow, Ui_MainWindow, PopupInfoWindows):
             writelog(error)
 
         # insert rows into active filials window
-        self.insert_into(self.table_active_filials, self.filials, 60, 50, 374)
+        if len(self.filials.keys()) > 4:  # если больше 4 филиалов = горизонтальный скролл
+            self.insert_into(self.table_active_filials, self.filials, 60, 50,
+                             357)
+        else:
+            self.insert_into(self.table_active_filials, self.filials, 60, 50, 374)
         # insert rows into all filials window
         self.insert_into(self.table_all_filials, self.all_filials, 60, 50, 350)
 
@@ -225,7 +237,7 @@ class FilialApp(QtWidgets.QMainWindow, Ui_MainWindow, PopupInfoWindows):
 
 def main():
     app = QtWidgets.QApplication(sys.argv)  # Новый экземпляр QApplication
-    window = FilialApp()  # Создаём объект класса ExampleApp
+    window = FilialApp()  # Создаём объект класса FilialApp
     window.show()  # Показываем окно
     app.exec_()  # и запускаем приложение
 
