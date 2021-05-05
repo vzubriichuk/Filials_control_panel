@@ -9,6 +9,7 @@ Time    : 30.04.2021 9:14
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import QTimer, Qt
+from PyQt5.Qt import QHBoxLayout
 from gui.filial_cp import Ui_MainWindow
 from gui.splash_screen import Ui_SplashScreen
 # from pyodbc import Error as SQLError
@@ -78,7 +79,10 @@ class SplashScreen(QtWidgets.QMainWindow, Ui_SplashScreen):
     def __init__(self):
         super().__init__()
         self.setupUi(self)  # Это нужно для инициализации нашего дизайна
-        self.setWindowIcon(QtGui.QIcon('resources/admin.png'))
+        # нужный костыль для вывода иконки на splash screen
+        hbox = QHBoxLayout(self)
+        hbox.addWidget(self.splash_label)
+        self.setLayout(hbox)
 
 # main app
 class FilialApp(QtWidgets.QMainWindow, Ui_MainWindow, PopupInfoWindows):
@@ -259,14 +263,14 @@ def main():
     splash_window = SplashScreen()
     splash_window.setWindowFlags(Qt.SplashScreen | Qt.FramelessWindowHint)
     splash_window.show()
-    QTimer.singleShot(5000, splash.quit)
+    QTimer.singleShot(1000, splash.quit)
     splash.exec_()
 
-    # main app
-    app = QtWidgets.QApplication(sys.argv)  # Новый экземпляр QApplication
-    window = FilialApp()  # Создаём объект класса FilialApp
-    window.show()  # Показываем окно
-    app.exec_()  # и запускаем приложение
+    # # main app
+    # app = QtWidgets.QApplication(sys.argv)  # Новый экземпляр QApplication
+    # window = FilialApp()  # Создаём объект класса FilialApp
+    # window.show()  # Показываем окно
+    # app.exec_()  # и запускаем приложение
 
 
 

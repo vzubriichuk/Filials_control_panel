@@ -3,6 +3,7 @@ __pycache__
 build
 dist
 env
+src/gui/resources
 
 # other files
 access.py
