@@ -16,6 +16,7 @@ class Error(Exception):
     Attributes:
         expression - input expression in which the error occurred;
     """
+
     def __init__(self, expression):
         self.expression = expression
         super().__init__(self.expression)
@@ -46,7 +47,6 @@ class DBConnect(object):
     def __exit__(self, type, value, traceback):
         self.__db.close()
 
-
     def get_reports(self):
         """ Check user permission.
             If access permitted returns True, otherwise None.
@@ -69,10 +69,40 @@ class DBConnect(object):
         self.__cursor.execute(query, report_id)
         return self.__cursor.fetchall()
 
-
     def get_all_filials(self, report_id):
         query = ''' 
             exec [reporting].[fcp@get_filials] @ReportID = ?
         '''
         self.__cursor.execute(query, report_id)
         return self.__cursor.fetchall()
+
+    def remove_filials(self, filials):
+        query = ''' 
+            exec reporting.fcp@filials_remove @Filials = ?
+        '''
+        try:
+            self.__cursor.execute(query, filials)
+            status = self.__cursor.fetchone()
+            self.__db.commit()
+            return status
+        except pyodbc.ProgrammingError as error:
+            writelog(error)
+            status = 0
+            return status
+
+    def add_filials(self, report_id, filials, user):
+        query = ''' 
+            exec reporting.fcp@filials_add @ReportID = ?,
+                                           @Filials = ?,
+                                           @User = ?
+                                            
+        '''
+        try:
+            self.__cursor.execute(query, report_id, filials, user)
+            status = self.__cursor.fetchone()
+            self.__db.commit()
+            return status
+        except pyodbc.ProgrammingError as error:
+            writelog(error)
+            status = 0
+            return status

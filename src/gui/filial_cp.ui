@@ -14,113 +14,12 @@
    <string>Панель управления филиалами в отчетах</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QTableWidget" name="table_active_filials">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>150</y>
-      <width>501</width>
-      <height>161</height>
-     </rect>
-    </property>
-    <column>
-     <property name="text">
-      <string>Выбрать</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>Филиал</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>Название филиала</string>
-     </property>
-     <property name="font">
-      <font>
-       <weight>50</weight>
-       <bold>false</bold>
-       <strikeout>false</strikeout>
-      </font>
-     </property>
-     <property name="textAlignment">
-      <set>AlignLeading|AlignVCenter</set>
-     </property>
-    </column>
-   </widget>
-   <widget class="QTableWidget" name="table_all_filials">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>370</y>
-      <width>501</width>
-      <height>171</height>
-     </rect>
-    </property>
-    <column>
-     <property name="text">
-      <string>Выбрать</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>Филиал</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>Название филиала</string>
-     </property>
-     <property name="textAlignment">
-      <set>AlignLeading|AlignVCenter</set>
-     </property>
-    </column>
-   </widget>
-   <widget class="QPushButton" name="btn_remove">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>320</y>
-      <width>151</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color:#525252;
-font-weight:bold;
-color:#FFFFFF;
-</string>
-    </property>
-    <property name="text">
-     <string>Исключить выбранное</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btn_add">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>550</y>
-      <width>151</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color:#525252;
-font-weight:bold;
-color:#FFFFFF;
-</string>
-    </property>
-    <property name="text">
-     <string>Добавить выбранное</string>
-    </property>
-   </widget>
    <widget class="QGroupBox" name="groupBox">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>20</x>
       <y>20</y>
-      <width>501</width>
+      <width>521</width>
       <height>101</height>
      </rect>
     </property>
@@ -166,6 +65,145 @@ color:#FFFFFF;
        <string>...</string>
       </property>
      </item>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_2">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>170</y>
+      <width>521</width>
+      <height>201</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Активные филиалы</string>
+    </property>
+    <property name="flat">
+     <bool>false</bool>
+    </property>
+    <property name="checkable">
+     <bool>false</bool>
+    </property>
+    <widget class="QTableWidget" name="table_active_filials">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>501</width>
+       <height>141</height>
+      </rect>
+     </property>
+     <column>
+      <property name="text">
+       <string>Выбрать</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Филиал</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Название филиала</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>50</weight>
+        <bold>false</bold>
+        <strikeout>false</strikeout>
+       </font>
+      </property>
+      <property name="textAlignment">
+       <set>AlignLeading|AlignVCenter</set>
+      </property>
+     </column>
+    </widget>
+    <widget class="QPushButton" name="btn_remove">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>170</y>
+       <width>151</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:#a83e32;
+font-weight:bold;
+color:#FFFFFF;
+</string>
+     </property>
+     <property name="text">
+      <string>Исключить выбранное</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_3">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>380</y>
+      <width>521</width>
+      <height>211</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Доступные филиалы</string>
+    </property>
+    <property name="flat">
+     <bool>false</bool>
+    </property>
+    <property name="checkable">
+     <bool>false</bool>
+    </property>
+    <widget class="QTableWidget" name="table_all_filials">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>501</width>
+       <height>151</height>
+      </rect>
+     </property>
+     <column>
+      <property name="text">
+       <string>Выбрать</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Филиал</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Название филиала</string>
+      </property>
+      <property name="textAlignment">
+       <set>AlignLeading|AlignVCenter</set>
+      </property>
+     </column>
+    </widget>
+    <widget class="QPushButton" name="btn_add">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>180</y>
+       <width>151</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:#6da832;
+font-weight:bold;
+color:#FFFFFF;
+</string>
+     </property>
+     <property name="text">
+      <string>Добавить выбранное</string>
+     </property>
     </widget>
    </widget>
   </widget>
