@@ -76,12 +76,14 @@ class DBConnect(object):
         self.__cursor.execute(query, report_id)
         return self.__cursor.fetchall()
 
-    def remove_filials(self, filials):
+    def remove_filials(self, report_id, filials, user):
         query = ''' 
-            exec reporting.fcp@filials_remove @Filials = ?
+            exec reporting.fcp@filials_remove @ReportID = ?,
+                                              @Filials = ?,
+                                              @User = ?
         '''
         try:
-            self.__cursor.execute(query, filials)
+            self.__cursor.execute(query, report_id, filials, user)
             status = self.__cursor.fetchone()
             self.__db.commit()
             return status

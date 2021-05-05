@@ -8,11 +8,14 @@ Time    : 30.04.2021 9:14
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
+from PyQt5.QtCore import QTimer, Qt
 from gui.filial_cp import Ui_MainWindow
+from gui.splash_screen import Ui_SplashScreen
 # from pyodbc import Error as SQLError
 from log_error import writelog
 from singleinstance import Singleinstance
 from db_connect import DBConnect
+from _version import __version__
 import access
 import sys
 import os
@@ -27,6 +30,15 @@ sql = DBConnect(server=db_info.get('Server'),
 
 
 LastStateRole = QtCore.Qt.UserRole
+
+
+def _add_user_label(self):
+    """ Adds user name in top right corner. """
+    user_label = tk.Label(parent, text='Пользователь: ' +
+                                       self.user_info.ShortUserName + '  Версия ' + __version__,
+                          font=('Arial', 8))
+    user_label.pack(side=tk.RIGHT, anchor=tk.NE)
+
 
 class PopupInfoWindows(QWidget):
     def __init__(self):
@@ -62,7 +74,7 @@ class PopupInfoWindows(QWidget):
                                 QMessageBox.Ok, QMessageBox.Ok)
 
 
-class SplashScreen(QtWidgets.QMainWindow, Ui_MainWindow):
+class SplashScreen(QtWidgets.QMainWindow, Ui_SplashScreen):
     def __init__(self):
         super().__init__()
         self.setupUi(self)  # Это нужно для инициализации нашего дизайна
@@ -74,11 +86,14 @@ class FilialApp(QtWidgets.QMainWindow, Ui_MainWindow, PopupInfoWindows):
         super().__init__()
         self.setupUi(self)  # Это нужно для инициализации нашего дизайна
         self.setWindowIcon(QtGui.QIcon('resources/admin.png'))
+        _translate = QtCore.QCoreApplication.translate
 
         self.report_id = int
         self.filials = 0
         self.all_filials = dict
         self.user = getpass.getuser()
+        # show user login in main window
+        self.lbl_ver_num.setText(_translate("MainWindow", __version__))
 
         # loading list of reports
         try:
@@ -106,9 +121,10 @@ class FilialApp(QtWidgets.QMainWindow, Ui_MainWindow, PopupInfoWindows):
                 self.remove_rows()
             with sql:
                 self.filials = dict(sql.get_report_info(self.report_id))
-                self.load_all_filial()
+                self.load_all_filial()  # Attempt to use a closed connection.
         except Exception as error:
             writelog(error)
+            pass
             
         if len(self.filials) == 0:
             self.remove_rows()
@@ -126,7 +142,7 @@ class FilialApp(QtWidgets.QMainWindow, Ui_MainWindow, PopupInfoWindows):
             writelog(error)
 
         # insert rows into active filials window
-        if len(self.filials.keys()) > 4:  # если больше 4 филиалов = горизонтальный скролл
+        if len(self.filials.keys()) > 5:  # если больше 5 филиалов = горизонтальный скролл
             self.insert_into(self.table_active_filials, self.filials, 60, 50,
                              357)
         else:
@@ -190,7 +206,7 @@ class FilialApp(QtWidgets.QMainWindow, Ui_MainWindow, PopupInfoWindows):
             if ListFilID is not None and len(ListFilID) != 0:
                 try:
                     with sql:
-                        status = sql.remove_filials(ListFilID)
+                        status = sql.remove_filials(self.report_id, ListFilID, self.user)
                         if status[0] == 1:
                             self.popup_remove_filid_succesfull()
                         elif status == 0:
@@ -235,11 +251,23 @@ class FilialApp(QtWidgets.QMainWindow, Ui_MainWindow, PopupInfoWindows):
 
 
 
+
+
 def main():
+    # splash screen
+    splash = QtWidgets.QApplication(sys.argv)
+    splash_window = SplashScreen()
+    splash_window.setWindowFlags(Qt.SplashScreen | Qt.FramelessWindowHint)
+    splash_window.show()
+    QTimer.singleShot(5000, splash.quit)
+    splash.exec_()
+
+    # main app
     app = QtWidgets.QApplication(sys.argv)  # Новый экземпляр QApplication
     window = FilialApp()  # Создаём объект класса FilialApp
     window.show()  # Показываем окно
     app.exec_()  # и запускаем приложение
+
 
 
 if __name__ == '__main__':  # Если мы запускаем файл напрямую, а не импортируем
