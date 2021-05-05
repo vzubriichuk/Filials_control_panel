@@ -35,7 +35,7 @@ class FilialApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.setWindowIcon(QtGui.QIcon('resources/admin.png'))
 
         self.report_id = int
-        self.filials = dict
+        self.filials = 0
         self.all_filials = dict
 
         # loading list of reports
@@ -49,21 +49,25 @@ class FilialApp(QtWidgets.QMainWindow, Ui_MainWindow):
             writelog(error)
 
         self.btn_report_info.clicked.connect(self.data_load)
-        self.btn_remove.clicked.connect(self.remove)
+        self.btn_remove.clicked.connect(self.remove_rows)
 
     # load info from choosing report
     def data_load(self):
+        # print(len(self.filials))
         for k, v in self.report_list.items():
             if v == self.reports_dropdown.currentText():
                 self.report_id = k
         try:
+            # clear table if report not have info
+            if self.filials != 0:
+                self.remove_rows()
             with sql:
                 self.filials = dict(sql.get_report_info(self.report_id))
         except Exception as error:
             writelog(error)
-
+            
         if len(self.filials) == 0:
-            print('nema info')
+            self.remove_rows()
         else:
             # run loading filials
             self.load_filial()
@@ -77,14 +81,13 @@ class FilialApp(QtWidgets.QMainWindow, Ui_MainWindow):
             writelog(error)
 
         # insert rows into active filials window
-        self.insert_into(self.table_active_filials, self.filials)
-
+        self.insert_into(self.table_active_filials, self.filials, 60, 50, 374)
         # insert rows into all filials window
-        self.insert_into(self.table_all_filials, self.all_filials)
+        self.insert_into(self.table_all_filials, self.all_filials, 60, 50, 350)
 
 
     @staticmethod
-    def insert_into(widget, lists):
+    def insert_into(widget, lists, wCol1, wCol2, wCol3):
         try:
             # create basic table window
             # widget.removeRow(0)
@@ -96,9 +99,9 @@ class FilialApp(QtWidgets.QMainWindow, Ui_MainWindow):
                 item.setFlags(QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
                 item.setCheckState(QtCore.Qt.Unchecked)
                 item.setData(LastStateRole, item.checkState())
-                widget.setColumnWidth(0, 60)
-                widget.setColumnWidth(1, 50)
-                widget.setColumnWidth(2, 374)
+                widget.setColumnWidth(0, wCol1)
+                widget.setColumnWidth(1, wCol2)
+                widget.setColumnWidth(2, wCol3)
                 widget.setItem(row, 0, item)
 
                 # insert values into table
@@ -117,11 +120,14 @@ class FilialApp(QtWidgets.QMainWindow, Ui_MainWindow):
             writelog(error)
 
 
-    def remove(self):
-        print(len(self.filials))
-        for i in range(0, len(self.filials)):
-            print(i)
-            self.table_active_filials.removeRow(i)
+    def remove_rows(self):
+        for i in range(len(self.filials)):
+            row = 0
+            self.table_active_filials.removeRow(row)
+        for i in range(len(self.all_filials)):
+            row = 0
+            self.table_all_filials.removeRow(row)
+
 
 def main():
     app = QtWidgets.QApplication(sys.argv)  # Новый экземпляр QApplication
