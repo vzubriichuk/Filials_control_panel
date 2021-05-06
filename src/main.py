@@ -89,14 +89,14 @@ class FilialApp(QtWidgets.QMainWindow, Ui_MainWindow, PopupInfoWindows):
     def __init__(self):
         super().__init__()
         self.setupUi(self)  # Это нужно для инициализации нашего дизайна
-        self.setWindowIcon(QtGui.QIcon('resources/admin.png'))
+        self.setWindowIcon(QtGui.QIcon('resources/shopping.png'))
         _translate = QtCore.QCoreApplication.translate
 
         self.report_id = int
         self.filials = 0
         self.all_filials = dict
+        self.graphic = str
         self.user = getpass.getuser()
-        # show user login in main window
         self.lbl_ver_num.setText(_translate("MainWindow", __version__))
 
         # loading list of reports
@@ -109,12 +109,12 @@ class FilialApp(QtWidgets.QMainWindow, Ui_MainWindow, PopupInfoWindows):
         except Exception as error:
             writelog(error)
 
-        self.btn_report_info.clicked.connect(self.data_load)
+        self.btn_report_info.clicked.connect(self.load_report)
         self.btn_remove.clicked.connect(self.check_rows_remove)
         self.btn_add.clicked.connect(self.check_rows_add)
 
     # load info from choosing report
-    def data_load(self):
+    def load_report(self):
         for k, v in self.report_list.items():
             if v == self.reports_dropdown.currentText():
                 self.report_id = k
@@ -124,11 +124,10 @@ class FilialApp(QtWidgets.QMainWindow, Ui_MainWindow, PopupInfoWindows):
                 self.remove_rows()
             with sql:
                 self.filials = dict(sql.get_report_info(self.report_id))
-                # self.load_all_filial()  # Attempt to use a closed connection.
+                self.load_all_filial()
         except Exception as error:
-            writelog(error)
+            # writelog(error)
             pass
-            
         if len(self.filials) == 0:
             self.remove_rows()
             self.load_all_filial()
@@ -137,12 +136,8 @@ class FilialApp(QtWidgets.QMainWindow, Ui_MainWindow, PopupInfoWindows):
 
     # load active filials from aid_FilialsAll
     def load_all_filial(self):
-        try:
-            with sql:
-                self.all_filials = dict(sql.get_all_filials(self.report_id))
-        except Exception as error:
-            writelog(error)
-
+        with sql:
+            self.all_filials = dict(sql.get_all_filials(self.report_id))
         # insert rows into active filials window
         if len(self.filials.keys()) > 5:  # если больше 5 филиалов = горизонтальный скролл
             self.insert_into(self.table_active_filials, self.filials, 60, 50,
@@ -150,7 +145,7 @@ class FilialApp(QtWidgets.QMainWindow, Ui_MainWindow, PopupInfoWindows):
         else:
             self.insert_into(self.table_active_filials, self.filials, 60, 50, 374)
         # insert rows into all filials window
-        self.insert_into(self.table_all_filials, self.all_filials, 60, 50, 350)
+        self.insert_into(self.table_all_filials, self.all_filials, 60, 50, 343)
 
     @staticmethod
     def insert_into(widget, lists, wCol1, wCol2, wCol3):
@@ -212,7 +207,7 @@ class FilialApp(QtWidgets.QMainWindow, Ui_MainWindow, PopupInfoWindows):
                             self.popup_remove_filid_succesfull()
                         elif status == 0:
                             self.remove_error()
-                    self.data_load()
+                    self.load_report()
                 except Exception as error:
                     writelog(error)
             else:
@@ -241,7 +236,7 @@ class FilialApp(QtWidgets.QMainWindow, Ui_MainWindow, PopupInfoWindows):
                             self.popup_add_filid_succesfull()
                         elif status == 0:
                             self.add_error()
-                    self.data_load()
+                    self.load_report()
                 except Exception as error:
                     writelog(error)
             else:

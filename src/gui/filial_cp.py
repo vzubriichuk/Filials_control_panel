@@ -32,7 +32,6 @@ class Ui_MainWindow(object):
         self.reports_dropdown = QtWidgets.QComboBox(self.groupBox)
         self.reports_dropdown.setGeometry(QtCore.QRect(10, 30, 391, 24))
         self.reports_dropdown.setObjectName("reports_dropdown")
-        self.reports_dropdown.addItem("")
         self.groupBox_2 = QtWidgets.QGroupBox(self.centralwidget)
         self.groupBox_2.setGeometry(QtCore.QRect(20, 170, 521, 201))
         self.groupBox_2.setFlat(False)
@@ -103,9 +102,8 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Панель управления филиалами в отчетах"))
-        self.groupBox.setTitle(_translate("MainWindow", "Выберите отчёт"))
+        self.groupBox.setTitle(_translate("MainWindow", "Выберите отчёт для изменения"))
         self.btn_report_info.setText(_translate("MainWindow", "Просмотреть информацию"))
-        self.reports_dropdown.setItemText(0, _translate("MainWindow", "..."))
         self.groupBox_2.setTitle(_translate("MainWindow", "Активные филиалы"))
         item = self.table_active_filials.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "Выбрать"))

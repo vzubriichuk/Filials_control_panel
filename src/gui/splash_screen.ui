@@ -35,7 +35,7 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>140</x>
+      <x>150</x>
       <y>60</y>
       <width>201</width>
       <height>20</height>
@@ -60,10 +60,10 @@
    <widget class="QLabel" name="splash_label">
     <property name="geometry">
      <rect>
-      <x>50</x>
-      <y>40</y>
-      <width>81</width>
-      <height>101</height>
+      <x>60</x>
+      <y>50</y>
+      <width>64</width>
+      <height>81</height>
      </rect>
     </property>
     <property name="text">
@@ -79,7 +79,7 @@
    <widget class="QLabel" name="label_footer1">
     <property name="geometry">
      <rect>
-      <x>140</x>
+      <x>150</x>
       <y>90</y>
       <width>251</width>
       <height>13</height>
@@ -92,7 +92,7 @@
    <widget class="QLabel" name="label_footer2">
     <property name="geometry">
      <rect>
-      <x>140</x>
+      <x>150</x>
       <y>100</y>
       <width>251</width>
       <height>14</height>
@@ -100,6 +100,19 @@
     </property>
     <property name="text">
      <string>Офис прогнозирования © 2021</string>
+    </property>
+   </widget>
+   <widget class="Line" name="line">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>60</y>
+      <width>16</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
     </property>
    </widget>
   </widget>

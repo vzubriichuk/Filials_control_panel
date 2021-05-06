@@ -57,8 +57,6 @@ class DBConnect(object):
             ORDER  BY ReportName
         '''
 
-        # query = '''exec reporting.fcp@get_reports'''
-
         self.__cursor.execute(query)
         return self.__cursor.fetchall()
 

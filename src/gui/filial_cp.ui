@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="title">
-     <string>Выберите отчёт</string>
+     <string>Выберите отчёт для изменения</string>
     </property>
     <property name="flat">
      <bool>false</bool>
@@ -60,11 +60,6 @@ color:#FFFFFF;
        <height>24</height>
       </rect>
      </property>
-     <item>
-      <property name="text">
-       <string>...</string>
-      </property>
-     </item>
     </widget>
    </widget>
    <widget class="QGroupBox" name="groupBox_2">
