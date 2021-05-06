@@ -209,7 +209,7 @@ color:#FFFFFF;
    <widget class="QLabel" name="lbl_version">
     <property name="geometry">
      <rect>
-      <x>460</x>
+      <x>480</x>
       <y>10</y>
       <width>41</width>
       <height>16</height>
@@ -222,9 +222,9 @@ color:#FFFFFF;
    <widget class="QLabel" name="lbl_ver_num">
     <property name="geometry">
      <rect>
-      <x>500</x>
+      <x>520</x>
       <y>10</y>
-      <width>41</width>
+      <width>31</width>
       <height>16</height>
      </rect>
     </property>

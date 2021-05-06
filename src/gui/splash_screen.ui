@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>300</width>
-    <height>300</height>
+    <width>423</width>
+    <height>185</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -35,21 +35,33 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>120</x>
-      <y>220</y>
-      <width>47</width>
-      <height>13</height>
+      <x>140</x>
+      <y>60</y>
+      <width>201</width>
+      <height>20</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
     <property name="text">
-     <string>TextLabel</string>
+     <string>Управление филиалами в отчетах</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
    <widget class="QLabel" name="splash_label">
     <property name="geometry">
      <rect>
-      <x>110</x>
-      <y>70</y>
+      <x>50</x>
+      <y>40</y>
       <width>81</width>
       <height>101</height>
      </rect>
@@ -62,6 +74,32 @@
     </property>
     <property name="margin">
      <number>0</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_footer1">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>90</y>
+      <width>251</width>
+      <height>13</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Департамент мастер-данных и отчетности</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_footer2">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>100</y>
+      <width>251</width>
+      <height>14</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Офис прогнозирования © 2021</string>
     </property>
    </widget>
   </widget>

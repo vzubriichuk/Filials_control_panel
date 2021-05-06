@@ -115,7 +115,6 @@ class FilialApp(QtWidgets.QMainWindow, Ui_MainWindow, PopupInfoWindows):
 
     # load info from choosing report
     def data_load(self):
-        # print(len(self.filials))
         for k, v in self.report_list.items():
             if v == self.reports_dropdown.currentText():
                 self.report_id = k
@@ -125,7 +124,7 @@ class FilialApp(QtWidgets.QMainWindow, Ui_MainWindow, PopupInfoWindows):
                 self.remove_rows()
             with sql:
                 self.filials = dict(sql.get_report_info(self.report_id))
-                self.load_all_filial()  # Attempt to use a closed connection.
+                # self.load_all_filial()  # Attempt to use a closed connection.
         except Exception as error:
             writelog(error)
             pass
@@ -134,7 +133,6 @@ class FilialApp(QtWidgets.QMainWindow, Ui_MainWindow, PopupInfoWindows):
             self.remove_rows()
             self.load_all_filial()
         else:
-            # run loading filials
             self.load_all_filial()
 
     # load active filials from aid_FilialsAll
@@ -158,7 +156,6 @@ class FilialApp(QtWidgets.QMainWindow, Ui_MainWindow, PopupInfoWindows):
     def insert_into(widget, lists, wCol1, wCol2, wCol3):
         try:
             # create basic table window
-            # widget.removeRow(0)
             countRows = len(lists)
             widget.setRowCount(countRows)
             for row in range(countRows):
@@ -254,10 +251,7 @@ class FilialApp(QtWidgets.QMainWindow, Ui_MainWindow, PopupInfoWindows):
             self.checked_error()
 
 
-
-
-
-def main():
+def splash_screen():
     # splash screen
     splash = QtWidgets.QApplication(sys.argv)
     splash_window = SplashScreen()
@@ -265,22 +259,25 @@ def main():
     splash_window.show()
     QTimer.singleShot(1000, splash.quit)
     splash.exec_()
+    # sys.exit(splash.exec_())
 
-    # # main app
-    # app = QtWidgets.QApplication(sys.argv)  # Новый экземпляр QApplication
-    # window = FilialApp()  # Создаём объект класса FilialApp
-    # window.show()  # Показываем окно
-    # app.exec_()  # и запускаем приложение
+def main_window():
+    # main app
+    app = QtWidgets.QApplication(sys.argv)  # Новый экземпляр QApplication
+    window = FilialApp()  # Создаём объект класса FilialApp
+    window.show()  # Показываем окно
+    app.exec_()  # и запускаем приложение
 
 
 
-if __name__ == '__main__':  # Если мы запускаем файл напрямую, а не импортируем
+if __name__ == '__main__':
     try:
         fname = os.path.basename(__file__)
         myapp = Singleinstance(fname)
         if myapp.alreadyrunning():
             sys.exit()
-        main()
+        splash_screen()
+        main_window()
     except Exception as e:
         writelog(e)
     finally:
