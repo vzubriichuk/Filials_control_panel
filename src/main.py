@@ -141,7 +141,7 @@ class FilialApp(QtWidgets.QMainWindow, Ui_MainWindow, PopupInfoWindows):
         # insert rows into active filials window
         if len(self.filials.keys()) > 5:  # если больше 5 филиалов = горизонтальный скролл
             self.insert_into(self.table_active_filials, self.filials, 60, 50,
-                             357)
+                             350)
         else:
             self.insert_into(self.table_active_filials, self.filials, 60, 50, 374)
         # insert rows into all filials window
@@ -252,7 +252,7 @@ def splash_screen():
     splash_window = SplashScreen()
     splash_window.setWindowFlags(Qt.SplashScreen | Qt.FramelessWindowHint)
     splash_window.show()
-    QTimer.singleShot(1000, splash.quit)
+    QTimer.singleShot(4000, splash.quit)
     splash.exec_()
     # sys.exit(splash.exec_())
 
