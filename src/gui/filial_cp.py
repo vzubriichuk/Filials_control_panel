@@ -113,6 +113,7 @@ class Ui_MainWindow(object):
         self.groupBox.setTitle(_translate("MainWindow", "Выберите отчёт для изменения"))
         self.btn_report_info.setText(_translate("MainWindow", "Просмотреть информацию"))
         self.groupBox_2.setTitle(_translate("MainWindow", "Активные филиалы"))
+        self.table_active_filials.setSortingEnabled(True)
         item = self.table_active_filials.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "Выбрать"))
         item = self.table_active_filials.horizontalHeaderItem(1)
