@@ -139,16 +139,12 @@ class FilialApp(QtWidgets.QMainWindow, Ui_MainWindow, PopupInfoWindows):
         with sql:
             self.all_filials = dict(sql.get_all_filials(self.report_id))
         # insert rows into active filials window
-        if len(self.filials.keys()) > 5:  # если больше 5 филиалов = горизонтальный скролл
-            self.insert_into(self.table_active_filials, self.filials, 60, 50,
-                             350)
-        else:
-            self.insert_into(self.table_active_filials, self.filials, 60, 50, 374)
+        self.insert_into(self.table_active_filials, self.filials)
         # insert rows into all filials window
-        self.insert_into(self.table_all_filials, self.all_filials, 60, 50, 343)
+        self.insert_into(self.table_all_filials, self.all_filials)
 
     @staticmethod
-    def insert_into(widget, lists, wCol1, wCol2, wCol3):
+    def insert_into(widget, lists):
         try:
             # create basic table window
             countRows = len(lists)
@@ -159,9 +155,9 @@ class FilialApp(QtWidgets.QMainWindow, Ui_MainWindow, PopupInfoWindows):
                 item.setFlags(QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEnabled)
                 item.setCheckState(QtCore.Qt.Unchecked)
                 item.setData(LastStateRole, item.checkState())
-                widget.setColumnWidth(0, wCol1)
-                widget.setColumnWidth(1, wCol2)
-                widget.setColumnWidth(2, wCol3)
+                widget.setColumnWidth(0, 60)
+                widget.setColumnWidth(1, 50)
+                widget.setColumnWidth(2, 380)
                 widget.setItem(row, 0, item)
 
                 # insert values into table
